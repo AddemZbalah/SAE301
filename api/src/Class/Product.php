@@ -55,7 +55,10 @@ class Product extends Entity {
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "category" => $this->idcategory
+            "category" => $this->idcategory,
+            "price" => $this->price,
+            "description" => $this->description,
+            "image" => $this->image,
         ];
     }
 
@@ -96,6 +99,58 @@ class Product extends Entity {
         $this->idcategory = $idcategory;
         return $this;
     }
+
+    /**
+     * Set the value of idcategory
+     *
+     * @return  self
+     */ 
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+
+    /**
+     * Set the value of idcategory
+     *
+     * @return  self
+     */ 
+    public function setDescription(float $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+
+    /**
+     * Set the value of idcategory
+     *
+     * @return  self
+     */ 
+    public function setImage(float $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    
 
     /**
      * Set the value of id

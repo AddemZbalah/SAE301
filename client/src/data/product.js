@@ -67,6 +67,8 @@ ProductData.fetch = async function(id){
 
 ProductData.fetchAll = async function(){
     let data = await getRequest('products');
+    console.log(data);
+
     return data==false ? fakeProducts : data;
 }
 
