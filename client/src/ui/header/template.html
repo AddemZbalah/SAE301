@@ -1,10 +1,74 @@
-<header class="pl-20">
+<!-- <header class="pl-20">
     <div class="flex text-black items-center gap-20">
         <img class="size-20" src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="">
         <nav class="flex gap-1 text-black">
-            <a href="/" data-link class=" no-underline px-4 py-2" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">VÊTEMENTS</a>
-            <a href="/products" data-link class=" no-underline px-4 py-2" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">PRODUITS</a>
-            <a href="/about" data-link class=" no-underline px-4 py-2" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">À PROPOS</a>
+            <a href="/" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">ACCUEIL</a>
+            <a href="/products" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">PRODUITS</a>
+            <a href="/category/1" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">VÊTEMENTS</a>
+            <a href="/category/2" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">CHAUSSURES</a>
+            <a href="/category/3" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">ACCESSOIRES</a>
+            <a href="/about" data-link class=" no-underline px-4 py-2"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                onmouseout="this.style.background='transparent'">À PROPOS</a>
         </nav>
-    </div>
+
+
+        <nav id="mobile-menu" class="hidden flex-col mt-4 space-y-2 md:hidden text-black">
+            <a href="/" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">ACCUEIL</a>
+            <a href="/products" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">PRODUITS</a>
+            <a href="/category/1" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">VÊTEMENTS</a>
+            <a href="/category/2" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">CHAUSSURES</a>
+            <a href="/category/3" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">ACCESSOIRES</a>
+            <a href="/about" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">À PROPOS</a>
+        </nav>
+</header>
+</div>
+</header> -->
+
+
+<header class="bg-white shadow-md px-6 py-4">
+  <div class="flex items-center gap-20 relative md: flex items-center">
+    <button id="menu-btn" class="absolute left-0 block md:hidden focus:outline-none">
+      <svg id="burger-icon" class="w-8 h-8" fill="none" stroke="black" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="black" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <img class="w-16 h-16 mx-auto md:mx-5" src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="Logo Geox">
+
+
+    <nav class="hidden md:flex items-center gap-4 text-black">
+      <a href="/" data-link class="px-1 py-1 hover:bg-gray-100 rounded">ACCUEIL</a>
+      <a href="/products" data-link class="px-1 py-1 hover:bg-gray-100 rounded">PRODUITS</a>
+      <a href="/category/1" data-link class="px-1 py-1 hover:bg-gray-100 rounded">VÊTEMENTS</a>
+      <a href="/category/2" data-link class="px-1 py-1 hover:bg-gray-100 rounded">CHAUSSURES</a>
+      <a href="/category/3" data-link class="px-1 py-1 hover:bg-gray-100 rounded">ACCESSOIRES</a>
+      <!-- <a href="/about" data-link class="px-1 py-1 hover:bg-gray-100 rounded">À PROPOS</a> -->
+    </nav>
+  </div>
+
+
+  <nav id="mobile-menu" class="hidden flex flex-col items-start mt-4 space-y-2 lg:hidden text-black">
+  <a href="/" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">ACCUEIL</a>
+  <a href="/products" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">PRODUITS</a>
+  <a href="/category/1" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">VÊTEMENTS</a>
+  <a href="/category/2" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">CHAUSSURES</a>
+  <a href="/category/3" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">ACCESSOIRES</a>
+  <!-- <a href="/about" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">À PROPOS</a> -->
+</nav>
 </header>

@@ -9,6 +9,8 @@ let M = {
 };
 
 
+
+
 let C = {};
 
 C.handler_clickOnProduct = function(ev){
@@ -18,10 +20,17 @@ C.handler_clickOnProduct = function(ev){
     }
 }
 
-C.init = async function(){
-    M.products = await ProductData.fetchAll(); 
+C.init = async function(params){
+    if (params.id){
+            M.products = (await ProductData.fetchAllByCategory(params.id));
+    }
+    else{
+          M.products = await ProductData.fetchAll();
+    }
     return V.init( M.products );
 }
+
+
 
 
 let V = {};
@@ -41,6 +50,8 @@ V.createPageFragment = function( data ){
    
    // Remplacer le slot par les produits
    pageFragment.querySelector('slot[name="products"]').replaceWith(productsDOM);
+
+   pageFragment.getElementById("nbrarticle").textContent = `${data.length} articles`;
    
    return pageFragment;
 }
@@ -53,5 +64,7 @@ V.attachEvents = function(pageFragment) {
 
 export function ProductsPage(params) {
     console.log("ProductsPage", params);
-    return C.init();
+    return C.init(params);
 }
+
+
