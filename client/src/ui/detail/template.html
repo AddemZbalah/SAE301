@@ -1,6 +1,6 @@
-<article class="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-lg">
+<!-- <article class="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-lg"> -->
   <!-- Placeholder pour l'image du produit -->
-  <div class="mb-6 flex h-64 items-center justify-center rounded-lg bg-gray-200">
+  <!-- <div class="mb-6 flex h-64 items-center justify-center rounded-lg bg-gray-200">
     <svg class="h-20 w-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
     </svg>
@@ -20,4 +20,22 @@
   >
     Ajouter au panier
   </button>
+</article> -->
+
+<article>
+  <div class="flex flex-row">
+    <ul class="flex flex-col">
+      <li class=""><img src="{{imagegallery}}" alt="gallery"></li>
+    </ul>
+    <figure class="flex flex-row gap-30">
+      <img src="../../../assets/image/products/{{image}}" alt="img" class="">
+      <figcaption class="w-full">
+        <h3 class="capitalize font-grotesk font-semibold text-2xl tracking-wider">{{name}}</h3>
+        <p class="capitalize font-grotesk text-desc text-1xs">{{description}}</p>
+        <p class="font-grotesk text-2xl font-normal mt-2">{{price}}€</p>
+        <button data-buy="{{id}}" class="w-full mt-8 font-grotesk bg-ajoutpanier px-6 py-3 text-lg font-semibold text-white transition">Ajouter au panier</button>
+      </figcaption>
+    </figure>
+  </div>
 </article>
+
