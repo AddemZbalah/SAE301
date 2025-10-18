@@ -1,22 +1,26 @@
 
-<article class="bg-white overflow-hidden mt-10 flex items-center justify-center">
+<article class="bg-white  mt-10 flex items-center justify-center p-10 mx-25">
   <a
     href="/products/{{id}}/{{name}}"
     data-link
     class="block transition hover:shadow-sm focus:outline-none focus:ring-1 focus:ring-black/20"
   >
-    <figure class="w-55 flex items-center justify-center flex-col">
-      <div class=" h-55 md:h-44 lg:h-48 bg-gray-100 flex items-center justify-center">
-        <img src="/assets/image/products/{{image}}" alt="{{name}}" class="" />
+    <figure class="w-100 h-auto flex items-center justify-center flex-col">
+      <div class="w-100 h-100 bg-gray-100 flex items-center justify-center">
+        <img 
+          src="/assets/image/products/{{image}}" 
+          alt="{{name}}" 
+          class="w-100 h-100 object-contain"
+        />
       </div>
 
-      <figcaption class="mt-4 p-4">
-        <h3 class="text-373A36 text-2xl md:text-lg font-semibold font-grotesk uppercase tracking-wide">
+      <figcaption class="mt-4 p-6 w-full h-56">
+        <h3 class="text-373A36 text-base font-semibold font-grotesk uppercase tracking-wide">
           {{name}}
         </h3>
 
-        <div class="mt-1">
-          <span class="text-sm md:text-base font-medium">
+        <div class="mt-3">
+          <span class="font-grotesk font-medium md:text-0.5xl lg:text-0.5xl">
             {{price}}€
           </span>
         </div>
