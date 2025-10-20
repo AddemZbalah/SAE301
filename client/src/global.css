@@ -8,13 +8,14 @@
   --color-green: var(--clr-green-300);
   --color-btn: var(--clr-green);
   --color-bg: var(--clr-bg);
-  --font-grotesk: "Open-sans", sans-serif;
+  --font-grotesk: "Open sans", sans-serif;
   --color-gray: var(--clr-gray-300);
   --color-gray-400: var(--clr-gray-400);
-  --color-373A36: var(--clr-373A36);
+  --color-name: var(--clr-373A36);
   --color-borderb : var(--clr-C5C5C5);
   --color-desc : var(--clr-818181);
   --color-ajoutpanier : var(--clr-373A36);
+  --color-title : var(--clr-212529);
 }
 
 @layer base {
@@ -38,9 +39,9 @@
     --clr-FAF4E7: oklch(96.8% 0.022 93.8);
     --clr-white: oklch(100% 0 0);
     --clr-1C7CB9: oklch(55.7% 0.132 250.7);
-    --clr-212529: oklch(27.8% 0.006 255.4);
+    --clr-212529: oklch(0.2621 0.0095 248.19);
     --clr-336699: oklch(46.9% 0.114 253.2);
-    --clr-373A36: oklch(24.8% 0.007 135.6);
+    --clr-373A36: oklch(0.3441 0.008 137.8);
     --clr-395670: oklch(38.5% 0.065 250.9);
     --clr-3D3D3D: oklch(28.5% 0.002 265);
     --clr-626A7C: oklch(43.2% 0.034 256.3);
