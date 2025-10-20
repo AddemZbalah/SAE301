@@ -22,20 +22,38 @@
   </button>
 </article> -->
 
-<article>
-  <div class="flex flex-row">
-    <ul class="flex flex-col">
-      <li class=""><img src="../../../assets/image/imgproductdetails/{{imagegallery}}" alt="gallery"></li>
-    </ul>
-    <figure class="flex flex-row gap-30">
-      <img src="../../../assets/image/products/{{image}}" alt="img" class="">
-      <figcaption class="w-full">
-        <h3 class="capitalize font-grotesk font-semibold text-2xl tracking-wider">{{name}}</h3>
-        <p class="capitalize font-grotesk text-desc text-1xs">{{description}}</p>
-        <p class="font-grotesk text-2xl font-normal mt-2">{{price}}€</p>
-        <button data-buy="{{id}}" class="w-full mt-8 font-grotesk bg-ajoutpanier px-6 py-3 text-lg font-semibold text-white transition">Ajouter au panier</button>
+<a class="flex flex-row items-center" href="/products"><img class="rotate-90 h-5 w-5" src="/assets/image/products/down-arrow.png" alt="return">Retour</a>
+<article class="flex justify-center items-center p-4">
+  <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+    <figure class="flex flex-col md:flex-row gap-6 w-full h-full">
+      
+      <!-- Galerie d'images -->
+      <ul class="flex flex-row md:flex-col gap-2 justify-center md:justify-start">
+        <li><slot name="image-galerie-slot"></slot></li>
+      </ul>
+
+      <!-- Informations produit -->
+      <figcaption class="w-full text-center md:text-left mt-4 md:mt-0">
+        <h3 class="capitalize font-grotesk font-normal text-2xl tracking-wider">
+          {{name}}
+        </h3>
+        <p class="capitalize font-grotesk text-desc text-sm mt-2">
+          {{description}}
+        </p>
+        <p class="font-grotesk text-2xl font-normal mt-3">
+          {{price}}€
+        </p>
+        <button
+          data-buy="{{id}}"
+          class="w-full md:w-auto mt-6 font-grotesk bg-ajoutpanier px-6 py-3 text-lg font-semibold text-white transition"
+        >
+          Ajouter au panier
+        </button>
       </figcaption>
+
     </figure>
   </div>
 </article>
+
+
 
