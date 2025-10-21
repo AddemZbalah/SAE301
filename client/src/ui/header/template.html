@@ -38,7 +38,7 @@
 
 <header class="bg-white py-2">
   <div class=" w-full border-borderb border-b-1 gap-20 relative md: flex items-center">
-    <button id="menu-btn" class="absolute left-4 block md:hidden focus:outline-none">
+    <button id="menu-btn" class="absolute left-4 block lg:hidden focus:outline-none">
       <svg id="burger-icon" class="w-8 h-8" fill="none" stroke="black" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16" />
@@ -52,23 +52,21 @@
     <img class="w-19 h-19 mx-auto md:mx-25" src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="Logo Geox">
 
 
-    <nav class="hidden text-[0.875rem] md:flex items-center gap-4 text-black">
+    <nav class="hidden text-[0.875rem] lg:flex items-center gap-4 text-black">
       <a href="/" data-link class="px-1 py-1 hover:underline hover:font-semibold">ACCUEIL</a>
       <a href="/products" data-link class="px-1 py-1 hover:underline hover:font-semibold">PRODUITS</a>
       <a href="/category/1" data-link class="px-1 py-1 hover:underline hover:font-semibold">VÊTEMENTS</a>
       <a href="/category/2" data-link class="px-1 py-1 hover:underline hover:font-semibold">CHAUSSURES</a>
       <a href="/category/3" data-link class="px-1 py-1 hover:underline hover:font-semibold">ACCESSOIRES</a>
-      <!-- <a href="/about" data-link class="px-1 py-1 hover:bg-gray-100 rounded">À PROPOS</a> -->
     </nav>
   </div>
 
 
-  <nav id="mobile-menu" class="bg-white text-[0.875rem] hidden absolute z-1000 flex flex-col items-start mt-4 space-y-2 lg:hidden text-black">
-  <a href="/" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">ACCUEIL</a>
-  <a href="/products" data-link class="relative  px-4 py-2 w-full hover:underline hover:font-semibold">PRODUITS</a>
-  <a href="/category/1" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">VÊTEMENTS</a>
-  <a href="/category/2" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">CHAUSSURES</a>
-  <a href="/category/3" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">ACCESSOIRES</a>
-  <!-- <a href="/about" data-link class="px-4 py-2 w-full hover:bg-gray-100 rounded">À PROPOS</a> -->
-</nav>
+  <nav id="mobile-menu" class="bg-white text-[0.875rem] hidden absolute z-1000 h-full w-35 flex flex-col items-start mt-4 space-y-2 lg:hidden text-black shadow-lg">
+    <a href="/" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">ACCUEIL</a>
+    <a href="/products" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">PRODUITS</a>
+    <a href="/category/1" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">VÊTEMENTS</a>
+    <a href="/category/2" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">CHAUSSURES</a>
+    <a href="/category/3" data-link class="relative px-4 py-2 w-full hover:underline hover:font-semibold">ACCESSOIRES</a>
+  </nav>
 </header>
