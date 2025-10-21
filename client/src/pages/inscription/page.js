@@ -1,34 +1,65 @@
-import { htmlToFragment } from "../../lib/utils";
+import { htmlToFragment } from "../../lib/utils.js";
+import { UserData } from "../../data/user.js";
 import template from "./template.html?raw";
 
-const InscriptionView = {
+let M = {};
+let V = {};
+let C = {};
 
-  async dom(){
-    const fragment = htmlToFragment(template);
-    const form = fragment.querySelector("form");
+C.init = function() {
+    return V.init();
+}
 
-    form.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-    });
-
-    const prenom = form.firstName.value;
-    const nom = form.lastName.value;
-    const mail = form.email.value;
-    const password = form.password.value;
-    const genre = form.genre.value;
-
-    console.log("Inscription:", { prenom, nom, email, password, genre });
-
-    const resultat = await AuthentificationData.signup(prenom, nom, email, password, genre);
-    console.log("Résultat de l'inscription :", resultat);
-
-    if (resultat && resultat.id) {
-      alert("Inscription réussie !");
-
-    }else{
-      alert("Échec de l'inscription. Veuillez réessayer.");
-    }
-    
+V.init = function() {
+    let fragment = V.createPageFragment();
+    V.attachEvents(fragment);
     return fragment;
-  } 
-};
+}
+
+V.createPageFragment = function() {
+    return htmlToFragment(template);
+}
+
+V.attachEvents = function(fragment) {
+    const form = fragment.querySelector('form');
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Récupérer les valeurs via form.nomDuChamp.value
+            const prenom = form.firstName.value.trim();
+            const nom = form.lastName.value.trim();
+            const gender = form.querySelector('input[name="gender"]:checked')?.value;
+            const mail = form.email.value.trim();
+            const password = form.password.value;
+            
+            // Validation simple
+            if (!prenom || !nom || !mail || !password || !gender) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            try {
+                // Appel à la fonction signup
+                const result = await UserData.signup(prenom, nom, mail, password, gender);
+                
+                // Vérifier si l'utilisateur a bien été créé
+                if (result && result.id) {
+                    alert('Inscription réussie !');
+                    window.location.href = '/connexion';
+                } else {
+                    alert('Erreur lors de l\'inscription');
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur: ' + error.message);
+            }
+        });
+    }
+}
+
+export function InscriptionPage(params) {
+    return C.init();
+}

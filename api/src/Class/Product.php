@@ -15,6 +15,10 @@ class Product extends Entity {
     private int $id; // id du produit
     private ?string $name = null; // nom du produit (nullable pour éviter erreur si non initialisé)
     private ?int $idcategory = null; // id de la catégorie du produit (nullable)
+    private ?array $images = null;
+    private ?float $price = null;        // Ajout de la propriété price
+    private ?string $description = null;
+    
 
     public function __construct(int $id){
         $this->id = $id;
@@ -58,7 +62,8 @@ class Product extends Entity {
             "category" => $this->idcategory,
             "price" => $this->price,
             "description" => $this->description,
-            "image" => $this->image,
+            "images" => $this->images,
+            
         ];
     }
 
@@ -122,7 +127,7 @@ class Product extends Entity {
      *
      * @return  self
      */ 
-    public function setDescription(float $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
@@ -135,19 +140,20 @@ class Product extends Entity {
 
 
     /**
-     * Set the value of idcategory
+     * Set the value of images
      *
+     * @param  ?array  $images
      * @return  self
      */ 
-    public function setImage(float $image): self
+    public function setImages(?array $images): self
     {
-        $this->image = $image;
+        $this->images = $images;
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImages(): ?array
     {
-        return $this->image;
+        return $this->images;
     }
 
     
