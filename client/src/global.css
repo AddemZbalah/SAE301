@@ -16,6 +16,7 @@
   --color-desc : var(--clr-818181);
   --color-ajoutpanier : var(--clr-373A36);
   --color-title : var(--clr-212529);
+  --color-whitetext : var(--clr-F2F2F2);
 }
 
 @layer base {
