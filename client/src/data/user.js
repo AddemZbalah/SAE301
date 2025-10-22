@@ -60,7 +60,25 @@ const UserData = {
   // Déconnexion (DELETE /api/auth)
   async logout() {
     return await deleteRequest("auth");
+  },
+
+    async update(userInfo) {
+    // userInfo = { prenom, nom, mail, gender, password (optionnel) }
+    const updateData = {
+      prenom: userInfo.prenom,
+      nom: userInfo.nom,
+      mail: userInfo.mail,
+      gender: userInfo.gender
+    };
+
+    if (userInfo.password && userInfo.password.trim() !== '') {
+      updateData.password = userInfo.password;
+    }
+    
+    return await jsonPatchRequest("users", updateData);
   }
-};
+
+  
+}
 
 export { UserData };

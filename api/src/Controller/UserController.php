@@ -32,7 +32,6 @@ class UserController extends EntityController {
             return ['error' => 'Données JSON invalides'];
         }
 
-        // INSCRIPTION UNIQUEMENT
         if (!isset($data->prenom) || !isset($data->nom) || !isset($data->mail) || !isset($data->password) || !isset($data->gender)) {
             http_response_code(400);
             return ["error" => "Champs manquants pour la création du compte"];
@@ -54,7 +53,6 @@ class UserController extends EntityController {
         $ok = $this->users->save($user);
 
         if ($ok) {
-            // Connecter automatiquement après inscription
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
