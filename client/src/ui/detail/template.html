@@ -1,6 +1,6 @@
 <!-- <article class="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-lg"> -->
-  <!-- Placeholder pour l'image du produit -->
-  <!-- <div class="mb-6 flex h-64 items-center justify-center rounded-lg bg-gray-200">
+<!-- Placeholder pour l'image du produit -->
+<!-- <div class="mb-6 flex h-64 items-center justify-center rounded-lg bg-gray-200">
     <svg class="h-20 w-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
     </svg>
@@ -22,14 +22,14 @@
   </button>
 </article> -->
 
-<a class="flex flex-row items-center gap-2 text-sm sm:text-base md:text-lg px-4 sm:px-6" href="/products">
+<a class="flex flex-row items-center gap-2 text-sm sm:text-base md:text-lg px-4 sm:px-6" href="/products" data-link>
   <img class="rotate-90 h-4 w-4 sm:h-5 sm:w-5" src="/assets/image/products/down-arrow.png" alt="return">
   Retour
 </a>
 
 <article class="flex items-center p-4 sm:p-6 md:p-8 w-full">
   <section class="flex flex-col w-full items-center gap-6">
-    <figure class="flex flex-col lg:flex-row gap-6 lg:gap-18 w-full h-auto lg:h-[55rem]">
+    <figure class="flex flex-col lg:flex-row gap-4 lg:gap-8 w-full h-auto lg:h-[55rem]">
 
       <!-- Galerie d'images -->
       <ul class="flex flex-col items-center gap-3 w-full lg:w-auto">
@@ -40,7 +40,8 @@
 
       <!-- Informations produit -->
       <figcaption class="w-full text-center lg:text-left mt-4 lg:mt-0 px-2 sm:px-4 md:px-6 lg:px-8 flex flex-col">
-        <h3 class="text-name text-base sm:text-lg md:text-xl lg:text-[1.10rem] font-bold font-grotesk uppercase tracking-wide">
+        <h3
+          class="text-name text-base sm:text-lg md:text-xl lg:text-[1.10rem] font-bold font-grotesk uppercase tracking-wide">
           {{name}}
         </h3>
         <p class="capitalize font-grotesk text-desc text-sm sm:text-base md:text-lg mt-2 leading-relaxed">
@@ -49,10 +50,8 @@
         <p class="font-grotesk text-xl sm:text-2xl md:text-[1.75rem] font-normal mt-3">
           {{price}}€
         </p>
-        <button
-          data-buy="{{id}}"
-          class="w-full mt-6 font-grotesk bg-ajoutpanier px-4 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 text-base sm:text-lg md:text-xl font-semibold text-white transition"
-        >
+        <button data-buy="{{id}}"
+          class="w-full mt-6 font-grotesk bg-ajoutpanier px-4 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 text-base sm:text-lg md:text-xl font-semibold text-white transition">
           Ajouter au panier
         </button>
       </figcaption>
@@ -60,9 +59,3 @@
     </figure>
   </section>
 </article>
-
-
-
-
-
-

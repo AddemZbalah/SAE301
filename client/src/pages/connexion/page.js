@@ -1,5 +1,6 @@
 import { UserData } from "../../data/user.js";
 import { htmlToFragment } from "../../lib/utils.js";
+import { ConnexionView } from "../../ui/connexion/index.js";
 import template from "./template.html?raw";
 
 let C = {};
@@ -72,7 +73,10 @@ V.init = function(router) {
 };
 
 V.createPageFragment = function() {
-    return htmlToFragment(template);
+    let pageFragment = htmlToFragment(template);
+    let connexionDOM = ConnexionView.dom();
+    pageFragment.querySelector('slot[name="connexion"]').replaceWith(connexionDOM);
+    return pageFragment;
 };
 
 V.attachEvents = function(fragment, router) {

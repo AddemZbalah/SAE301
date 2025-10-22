@@ -2,6 +2,7 @@ import { UserData } from "../../data/user.js";
 import { ProfilView } from "../../ui/profil/index.js";
 import { htmlToFragment } from "../../lib/utils.js";
 import template from "./template.html?raw";
+import { deleteRequest } from "../../lib/api-request.js";
 
 let M = {
     user: null
@@ -12,14 +13,20 @@ let C = {};
 C.handler_logout = async function(ev) {
     ev.preventDefault();
     
-    try {
-        await UserData.logout();
+    console.log("Tentative de déconnexion");
+    
+    const result = await deleteRequest('auth');
+    
+    console.log("Réponse du serveur:", result);
+    
+    if (result && result.success) {
+        console.log("Session détruite");
         alert('Déconnexion réussie');
+        
         window.location.href = '/connexion';
-    } catch (error) {
-        console.error('Erreur de déconnexion:', error);
-        alert('Déconnexion réussie');
-        window.location.href = '/connexion';
+        
+    } else {
+        alert('Erreur lors de la déconnexion');
     }
 };
 
@@ -61,7 +68,7 @@ V.createPageFragment = function(user) {
 };
 
 V.attachEvents = function(fragment) {
-    const logoutBtn = fragment.querySelector('#logout-btn');
+    const logoutBtn = fragment.querySelector('#deco-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', C.handler_logout);
     }

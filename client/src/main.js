@@ -41,13 +41,9 @@ router.addRoute("/profil", ProfilPage, {requireAuth: true});
 router.addRoute("*", The404Page);
 
 
-// Fonction pour initialiser l'app
 async function initApp() {
-    // D'abord vérifier l'auth
     await updateAuthStatus();
-    // Puis démarrer le router
     router.start();
 }
 
-// Démarrer l'app
 initApp();

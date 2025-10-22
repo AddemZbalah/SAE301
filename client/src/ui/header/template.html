@@ -1,44 +1,7 @@
-<!-- <header class="pl-20">
-    <div class="flex text-black items-center gap-20">
-        <img class="size-20" src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="">
-        <nav class="flex gap-1 text-black">
-            <a href="/" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">ACCUEIL</a>
-            <a href="/products" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">PRODUITS</a>
-            <a href="/category/1" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">VÊTEMENTS</a>
-            <a href="/category/2" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">CHAUSSURES</a>
-            <a href="/category/3" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">ACCESSOIRES</a>
-            <a href="/about" data-link class=" no-underline px-4 py-2"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-                onmouseout="this.style.background='transparent'">À PROPOS</a>
-        </nav>
-
-
-        <nav id="mobile-menu" class="hidden flex-col mt-4 space-y-2 md:hidden text-black">
-            <a href="/" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">ACCUEIL</a>
-            <a href="/products" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">PRODUITS</a>
-            <a href="/category/1" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">VÊTEMENTS</a>
-            <a href="/category/2" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">CHAUSSURES</a>
-            <a href="/category/3" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">ACCESSOIRES</a>
-            <a href="/about" data-link class="no-underline px-4 py-2 hover:bg-gray-100 rounded">À PROPOS</a>
-        </nav>
-</header>
-</div>
-</header> -->
-
-
 <header class="bg-white py-2">
-  <div class=" w-full border-borderb border-b-1 gap-20 relative md: flex items-center">
-    <button id="menu-btn" class="absolute left-4 block lg:hidden focus:outline-none">
+  <section
+    class="w-full border-borderb border-b-1 relative flex items-center justify-between px-6 py-4 lg:px-0 lg:py-2">
+    <button id="menu-btn" class="block lg:hidden focus:outline-none">
       <svg id="burger-icon" class="w-8 h-8" fill="none" stroke="black" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -47,21 +10,21 @@
       </svg>
     </button>
 
-    <img class="w-19 h-19 mx-auto md:mx-25" src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="Logo Geox">
+    <img class="w-19 h-19 absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0 lg:ml-25"
+      src="../../../assets/image/logo_marque/Geox-Logo.svg" alt="Logo Geox">
 
-
-    <nav class="hidden text-[0.875rem] lg:flex items-center gap-4 text-black">
+    <nav class="hidden text-[0.875rem] lg:flex items-center gap-4 text-black lg:ml-12">
       <a href="/" data-link class="px-1 py-1 hover:underline hover:font-semibold">ACCUEIL</a>
       <a href="/products" data-link class="px-1 py-1 hover:underline hover:font-semibold">PRODUITS</a>
       <a href="/category/1" data-link class="px-1 py-1 hover:underline hover:font-semibold">VÊTEMENTS</a>
       <a href="/category/2" data-link class="px-1 py-1 hover:underline hover:font-semibold">CHAUSSURES</a>
       <a href="/category/3" data-link class="px-1 py-1 hover:underline hover:font-semibold">ACCESSOIRES</a>
     </nav>
-    <a href="/profil" data-link class="cursor-pointer"><img class="w-7 h-7 mx-auto md:mx-25"
-        src="../../../assets/image/logo_marque/user.png" alt="Logo Geox"></a>
-  </div>
 
-
+    <a href="/profil" data-link class="cursor-pointer ml-auto lg:mr-25">
+      <img class="w-5 h-5" src="../../../assets/image/logo_marque/user.png" alt="Profil utilisateur">
+    </a>
+  </section>
 
   <nav id="mobile-menu"
     class="bg-white text-[0.875rem] hidden absolute z-1000 h-full w-35 flex flex-col items-start mt-4 space-y-2 lg:hidden text-black shadow-lg">

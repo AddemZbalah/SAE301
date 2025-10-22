@@ -42,25 +42,23 @@ let HeaderView = {
   dom: function () {
     const fragment = htmlToFragment(template);
 
-    // Sélection des éléments dans le fragment
+
     const menuBtn = fragment.querySelector('#menu-btn');
     const mobileMenu = fragment.querySelector('#mobile-menu');
     const burgerIcon = fragment.querySelector('#burger-icon');
     const closeIcon = fragment.querySelector('#close-icon');
 
-    // Sécurité : on vérifie que tout existe
+
     if (menuBtn && mobileMenu && burgerIcon && closeIcon) {
       menuBtn.addEventListener('click', () => {
-        // Affiche ou cache le menu
+
         mobileMenu.classList.toggle('hidden');
 
-        // Alterne les icônes burger et croix
         burgerIcon.classList.toggle('hidden');
         closeIcon.classList.toggle('hidden');
       });
     }
 
-    // Retour du fragment prêt à être monté
     return fragment;
   }
 };
