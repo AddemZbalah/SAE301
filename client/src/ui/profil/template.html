@@ -1,0 +1,32 @@
+<section class="flex flex-col items-center justify-center min-h-screen p-8">
+  <header class="text-center">
+    <h1 class="text-3xl font-bold font-grotesk mb-4">Bonjour {{prenom}} {{nom}}</h1>
+    <p class="text-gray-600">{{mail}}</p>
+  </header>
+
+  <article class="mt-8 w-full max-w-md">
+    <h2 class="text-xl font-semibold mb-4">Informations personnelles</h2>
+
+    <section class="space-y-3">
+      <p>
+        <strong class="font-medium text-gray-700">Prénom :</strong>
+        <span class="text-gray-900">{{prenom}}</span>
+      </p>
+
+      <p>
+        <strong class="font-medium text-gray-700">Nom :</strong>
+        <span class="text-gray-900">{{nom}}</span>
+      </p>
+
+      <p>
+        <strong class="font-medium text-gray-700">Email :</strong>
+        <span class="text-gray-900">{{mail}}</span>
+      </p>
+
+      <p>
+        <strong class="font-medium text-gray-700">Genre :</strong>
+        <span class="text-gray-900">{{gender}}</span>
+      </p>
+    </section>
+  </article>
+</section>

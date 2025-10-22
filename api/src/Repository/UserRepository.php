@@ -1,16 +1,25 @@
 <?php
+// filepath: c:\Users\addem\Desktop\SAE301\SAE301\api\src\Repository\UserRepository.php
 
 require_once("src/Repository/EntityRepository.php");
 require_once("src/Class/User.php");
 
+/**
+ * Classe UserRepository
+ * 
+ * Gère l'accès aux données de l'entité User
+ */
 class UserRepository extends EntityRepository {
 
     public function __construct(){
         parent::__construct();
     }
 
+    /**
+     * Récupère un User par son ID
+     */
     public function find($id): ?User {
-        $requete = $this->cnx->prepare("SELECT * FROM user WHERE id = :value");
+        $requete = $this->cnx->prepare("SELECT * FROM User WHERE id = :value");
         $requete->bindParam(':value', $id);
         $requete->execute();
         $answer = $requete->fetch(PDO::FETCH_OBJ);
@@ -27,6 +36,9 @@ class UserRepository extends EntityRepository {
         return $user;
     }
 
+    /**
+     * Récupère tous les Users
+     */
     public function findAll(): array {
         $requete = $this->cnx->prepare("SELECT * FROM User");
         $requete->execute();
@@ -40,17 +52,20 @@ class UserRepository extends EntityRepository {
             $user->setPassword($obj->password);
             $user->setMail($obj->mail);
             $user->setGender($obj->gender);
-            array_push($res, $user);
+            $res[] = $user;
         }
        
         return $res;
     }
 
-    public function save($user){
+    /**
+     * Sauvegarde un nouveau User dans la base de données
+     */
+    public function save($user): bool {
         $requete = $this->cnx->prepare("INSERT INTO User (prenom, nom, password, mail, gender) VALUES (:prenom, :nom, :password, :mail, :gender)");
         $prenom = $user->getPrenom();
         $nom = $user->getNom();
-        $password = $user->getPassword(); // Déjà hashé dans le controller
+        $password = $user->getPassword();
         $mail = $user->getMail();
         $gender = $user->getGender();
         
@@ -71,13 +86,19 @@ class UserRepository extends EntityRepository {
         return false;
     }
 
-    public function delete($id){
+    /**
+     * Supprime un User de la base de données
+     */
+    public function delete($id): bool {
         $requete = $this->cnx->prepare("DELETE FROM User WHERE id = :id");
         $requete->bindParam(':id', $id);
         return $requete->execute();
     }
 
-    public function update($user){
+    /**
+     * Met à jour un User existant
+     */
+    public function update($user): bool {
         $requete = $this->cnx->prepare("UPDATE User SET prenom = :prenom, nom = :nom, mail = :mail, gender = :gender WHERE id = :id");
         $id = $user->getId();
         $prenom = $user->getPrenom();
@@ -94,6 +115,9 @@ class UserRepository extends EntityRepository {
         return $requete->execute();
     }
 
+    /**
+     * Trouve un utilisateur par son email
+     */
     public function findByMail($mail): ?User {
         $requete = $this->cnx->prepare("SELECT * FROM User WHERE mail = :mail");
         $requete->bindParam(':mail', $mail);

@@ -1,57 +1,44 @@
-/**
- *  Besoin de comprendre comment fonctionne fetch ?
- *  C'est ici : https://fr.javascript.info/fetch
- */
-
-
 let API_URL = "https://mmi.unilim.fr/~zbalah3/SAE301/api/";
-
 
 /**
  *  getRequest
  * 
  *  Requête en GET l'URI uri. 
- *  Une requête en GET correspond à une demande de "lecture" de la ressource d'URI uri.
- * 
- *  Par exemple "http://.../products" pour lire tous les produits
- *  Ou "http://.../products/3" pour lire le produit d'identifiant 3
- * 
- *  Le serveur renverra les données au format JSON.
- *  La fonction les retourne après conversion en objet Javascript (ou false si la requête a échoué)
- * 
- *  ATTENTION : La fonction est asynchrone, donc quand on l'appelle il ne faut pas oublier "await".
- *  Exemple : let data = await getRequest(http://.../api/products);
+ *  Retourne les données au format JSON converties en objet Javascript.
  */
 let getRequest = async function(uri){
-
     let options = {
-        method: "GET"
+        method: "GET",
+        credentials: 'include'
     };
 
     try{
-        var response = await fetch(API_URL+uri, options); // exécution (asynchrone) de la requête et attente de la réponse
+        var response = await fetch(API_URL+uri, options);
     }
     catch(e){
-        console.error("Echec de la requête : "+e); // affichage de l'erreur dans la console
+        console.error("Echec de la requête : "+e);
         return false;
     }
     if (response.status != 200){
-        console.error("Erreur de requête : " + response.status); // affichage de l'erreur dans la console
-        return false; // si le serveur a renvoyé une erreur, on retourne false
-    }  // si le serveur a renvoyé une erreur, on retourne false
-    let $obj = await response.json(); // extraction du json retourné par le serveur (opération asynchrone aussi)
-    return $obj; // et on retourne le tout (response.json() a déjà converti le json en objet Javscript)
+        console.error("Erreur de requête : " + response.status);
+        return false;
+    }
+    let $obj = await response.json();
+    return $obj;
 }
 
-
-
+/**
+ *  postRequest
+ * 
+ *  Requête en POST avec FormData
+ */
 let postRequest = async function(uri, data){
     let options = {
         credentials: 'include',
         method: 'POST',
-        // header : {
-        //     'Content-Type': 'multipart/form-data'
-        // },
+        headers : {
+            'Content-Type': 'multipart/form-data'
+        },
         body: data
     }
 
@@ -62,45 +49,84 @@ let postRequest = async function(uri, data){
         console.error("Echec de la requête : " + e);
         return false;
     }
+    
+    let $obj = await response.json();
+    
+    if (response.status != 200 && response.status != 201){
+        console.error("Erreur de requête : " + response.status, $obj);
+        return $obj;
+    }
+    
+    return $obj;
+}
+
+/**
+ *  jsonPostRequest
+ * 
+ *  Requête en POST avec JSON
+ *  Utilisé pour login, signup, etc.
+ */
+let jsonPostRequest = async function(uri, data){
+    let options = {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    try{
+        var response = await fetch(API_URL+uri, options);
+    }
+    catch(e){
+        console.error("Echec de la requête : " + e);
+        return false;
+    }
+    
+    let $obj = await response.json();
+    
+    if (response.status != 200 && response.status != 201){
+        console.error("Erreur de requête : " + response.status, $obj);
+        return $obj;
+    }
+    
+    return $obj;
+}
+
+/**
+ *  deleteRequest
+ * 
+ *  Requête en DELETE pour supprimer une ressource ou se déconnecter
+ */
+let deleteRequest = async function(uri){
+    let options = {
+        method: "DELETE",
+        credentials: 'include'
+    };
+
+    try{
+        var response = await fetch(API_URL+uri, options);
+    }
+    catch(e){
+        console.error("Echec de la requête : "+e);
+        return false;
+    }
     if (response.status != 200){
         console.error("Erreur de requête : " + response.status);
         return false;
     }
     let $obj = await response.json();
     return $obj;
-} 
-
-
+}
 
 /**
- *  deleteRequest
- * 
- *  Requête en DELETE l'URI uri. Par exemple "http://.../products/3"
- * 
- *  Une requête en DELETE correspond à une demande de suppression d'une ressource.
- *  Par exemple : patchRequest("http://.../products/3") pour supprimer le produit d'identifiant 3
- * 
- *  La fonction retourne true ou false selon le succès de l'opération
- */
-let deleteRequest = async function(uri){
-   // Pas implémenté. TODO if needed.
-}
-
-
-/** 
  *  patchRequest
  * 
- *  Requête en PATCH l'URI uri. Par exemple "http://.../products/3"
- * 
- *  Une requête en PATCH correspond à une demande de modification/mise à jour d'une ressource.
- *  Pour modifier la ressource, on fournit les données utiles via le paramètre data.
- *  Par exemple : patchRequest("http://.../products/3", {category:1} ) pour modifier la catégorie du produit d'identifiant 3
- * 
- *  La fonction retourne true ou false selon le succès de l'opération
+ *  Pas implémenté. TODO if needed.
  */
 let patchRequest = async function(uri, data){
-   // Pas implémenté. TODO if needed.
+   // TODO
 }
 
-
-export {getRequest, postRequest }
+export {getRequest, postRequest, jsonPostRequest, deleteRequest, patchRequest}

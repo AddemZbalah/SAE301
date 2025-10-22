@@ -1,28 +1,19 @@
+<section id="image-galerie-slot" class="w-full">
+  <article id="gallery-wrapper"
+    class="relative flex flex-col md:flex-row-reverse lg:flex-row items-center lg:items-start">
+    <figure id="main-image-container" class="w-full lg:w-[80%]">
+      <img src="/assets/image/products/{{mainImage}}" id="main-image"
+        class="w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-contain" alt="Image principale" />
+    </figure>
 
-<div id="image-galerie-slot" class="w-full">
-  <div id="gallery-wrapper" class="relative flex flex-col md:flex-row-reverse lg:flex-row items-center lg:items-start">
-    <div id="main-image-container" class="w-full lg:w-[80%]">
-      <img 
-        src="/assets/image/products/{{mainImage}}"
-        id="main-image"
-        class="w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-contain"
-        alt="Image principale"
-      />
-    </div>
-
-    <div 
-      id="thumbnails-container" 
+    <nav id="thumbnails-container"
       class="relative flex md:flex-col md:top-1 md:items-start sm:flex-row items-center gap-3 mt-4 lg:mt-0 lg:absolute lg:left-4 lg:top-4 lg:flex-col lg:items-start"
-    >
-      <!-- Les miniatures avec classes Tailwind seront ajoutées ici -->
+      aria-label="Miniatures de la galerie">
       <template id="thumbnail-template">
-        <img 
+        <img
           class="thumbnail w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain cursor-pointer border-2 border-transparent hover:border-gray-400 transition-all"
-          alt="Miniature"
-        />
+          alt="Miniature" />
       </template>
-    </div>
-  </div>
-</div>
-
-
+    </nav>
+  </article>
+</section>
