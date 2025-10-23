@@ -125,7 +125,7 @@ let deleteRequest = async function(uri){
  * 
  *  Pas implémenté. TODO if needed.
  */
-let patchRequest = async function(uri, data){
+let jsonPatchRequest = async function(uri, data){
      let options = {
        credentials: 'include',
        method: 'PATCH',
@@ -149,4 +149,4 @@ let patchRequest = async function(uri, data){
 }
 
 
-export {getRequest, postRequest, jsonPostRequest, deleteRequest, patchRequest}
+export {getRequest, postRequest, jsonPostRequest, deleteRequest, jsonPatchRequest}

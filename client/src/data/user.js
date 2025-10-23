@@ -1,38 +1,8 @@
-// import { postRequest } from "../lib/api-request.js";
-
-// const UserData = {
-
-
-//   async signup(prenom, nom, mail, password, gender) {
-
-//     const formData = new FormData();
-//     formData.append('prenom', prenom);
-//     formData.append('nom', nom);
-//     formData.append('mail', mail);
-//     formData.append('password', password);
-//     formData.append('gender', gender);
-    
-//     return await postRequest("users", formData);
-//   },
-
-//   async login(mail, password) {
-//     const formData = new FormData();
-//     formData.append('mail', mail);
-//     formData.append('password', password);
-    
-//     return await postRequest("login", formData);
-//   }
-// };
-
-
-// export { UserData };
-
-import { getRequest, jsonPostRequest, deleteRequest } from "../lib/api-request.js";
+import { getRequest, jsonPostRequest, deleteRequest, jsonPatchRequest } from "../lib/api-request.js";
 
 const UserData = {
   // Inscription (POST /api/users)
   async signup(data) {
-    // data = { prenom, nom, mail, password, gender }
     const genderShort = data.gender === 'male' ? 'M' : 'F';
     
     const userData = { 
@@ -48,7 +18,6 @@ const UserData = {
 
   // Connexion (POST /api/auth)
   async login(data) {
-    // data = { mail, password }
     return await jsonPostRequest("auth", data);
   },
 
@@ -62,8 +31,8 @@ const UserData = {
     return await deleteRequest("auth");
   },
 
-    async update(userInfo) {
-    // userInfo = { prenom, nom, mail, gender, password (optionnel) }
+  // Mettre à jour le profil (PATCH /api/users)
+  async update(userInfo) {
     const updateData = {
       prenom: userInfo.prenom,
       nom: userInfo.nom,
@@ -71,14 +40,14 @@ const UserData = {
       gender: userInfo.gender
     };
 
-    if (userInfo.password && userInfo.password.trim() !== '') {
-      updateData.password = userInfo.password;
+    // Ajouter les mots de passe si fournis
+    if (userInfo.newPassword && userInfo.newPassword.trim() !== '') {
+      updateData.currentPassword = userInfo.currentPassword;
+      updateData.newPassword = userInfo.newPassword;
     }
     
     return await jsonPatchRequest("users", updateData);
   }
-
-  
-}
+};
 
 export { UserData };

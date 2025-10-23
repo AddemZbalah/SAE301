@@ -83,8 +83,89 @@ class UserController extends EntityController {
         return $ok;
     }
 
+    public function patch(HttpRequest $request) {
+        return $this->processPatchRequest($request);
+    }
+
     protected function processPatchRequest(HttpRequest $request) {
-        return false;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            return ['error' => 'Non authentifié'];
+        }
+        
+        $json = $request->getJson();
+        $data = json_decode($json);
+        
+        if (!$data) {
+            http_response_code(400);
+            return ['error' => 'Données JSON invalides'];
+        }
+        
+        $userId = $_SESSION['user_id'];
+        $user = $this->users->find($userId);  // Changé de $this->repository à $this->users
+        
+        if (!$user) {
+            http_response_code(404);
+            return ['error' => 'Utilisateur non trouvé'];
+        }
+        
+        if (isset($data->prenom)) {
+            $user->setPrenom($data->prenom);
+        }
+        
+        if (isset($data->nom)) {
+            $user->setNom($data->nom);
+        }
+        
+        if (isset($data->mail)) {
+            $existingUser = $this->users->findByMail($data->mail);  // Changé aussi ici
+            if ($existingUser && $existingUser->getId() !== $userId) {
+                http_response_code(409);
+                return ['error' => 'Cet email est déjà utilisé'];
+            }
+            $user->setMail($data->mail);
+        }
+        
+        if (isset($data->gender)) {
+            $user->setGender($data->gender);
+        }
+        
+        if (isset($data->newPassword) && !empty($data->newPassword)) {
+            if (!isset($data->currentPassword) || empty($data->currentPassword)) {
+                http_response_code(400);
+                return ['error' => 'Mot de passe actuel requis'];
+            }
+            
+            if (!password_verify($data->currentPassword, $user->getPassword())) {
+                http_response_code(401);
+                return ['error' => 'Mot de passe actuel incorrect'];
+            }
+            
+            $user->setPassword(password_hash($data->newPassword, PASSWORD_DEFAULT));
+        }
+        
+        $success = $this->users->update($user);  // Changé aussi ici
+        
+        if ($success) {
+            return [
+                'success' => true,
+                'message' => 'Profil mis à jour',
+                'user' => [
+                    'id' => $user->getId(),
+                    'prenom' => $user->getPrenom(),
+                    'nom' => $user->getNom(),
+                    'mail' => $user->getMail(),
+                    'gender' => $user->getGender()
+                ]
+            ];
+        }
+        
+        http_response_code(500);
+        return ['error' => 'Erreur lors de la mise à jour'];
     }
 }
 ?>

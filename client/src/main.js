@@ -13,7 +13,7 @@ import { The404Page } from "./pages/404/page.js";
 
 const router = new Router('app', {loginPath: '/connexion'});
 
-async function updateAuthStatus() {
+export async function updateAuthStatus() {
     const result = await UserData.getCurrentUser();
     if (result && result.logged) {
         router.setAuth(true);

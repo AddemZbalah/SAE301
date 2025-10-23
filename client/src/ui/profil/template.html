@@ -1,33 +1,103 @@
-<section class="flex flex-col  min-h-screen p-8">
-  <header class="text-center">
-    <h1 class="text-3xl font-bold font-grotesk mb-4">Bonjour {{prenom}} {{nom}}</h1>
-    <p class="text-gray-600">{{mail}}</p>
-  </header>
+<section class="flex flex-col min-h-screen font-grotesk">
 
-  <article class="mt-8 w-full max-w-md">
-    <h2 class="text-xl font-semibold mb-4">Informations personnelles</h2>
+  <section class="pt-4 pl-4 sm:pt-6 sm:pl-8">
+    <a class="flex flex-row items-center gap-2 text-sm sm:text-base md:text-lg" href="/" data-link>
+      <img class="rotate-90 h-4 w-4 sm:h-5 sm:w-5" src="/assets/image/products/down-arrow.png" alt="return">
+      Retour
+    </a>
+  </section>
 
-    <section class="space-y-3">
-      <p>
-        <strong class="font-medium text-gray-700">Prénom :</strong>
-        <span class="text-gray-900">{{prenom}}</span>
-      </p>
+  <section class="p-8">
+    <header class="underline">
+      <h1 class="text-[1.5rem] font-bold font-grotesk mb-4">Bonjour, {{prenom}} {{nom}}.</h1>
+      <p class="text-gray-400">{{mail}}</p>
+    </header>
 
-      <p>
-        <strong class="font-medium text-gray-700">Nom :</strong>
-        <span class="text-gray-900">{{nom}}</span>
-      </p>
+    <section class="mt-8 w-full flex flex-col lg:flex-row gap-35">
 
-      <p>
-        <strong class="font-medium text-gray-700">Email :</strong>
-        <span class="text-gray-900">{{mail}}</span>
-      </p>
+      <article class="flex-1 max-w-md bg-whitetext p-4">
+        <h2 class="text-xl font-semibold mb-4">Informations personnelles</h2>
 
-      <p>
-        <strong class="font-medium text-gray-700">Genre :</strong>
-        <span class="text-gray-900">{{gender}}</span>
-      </p>
+        <section class="space-y-4">
+          <section>
+            <p class="mb-2">
+              <strong class="font-medium text-gray-400">Prénom :</strong>
+              <span class="text-darkgrey">{{prenom}}</span>
+            </p>
+            <input type="text" name="prenom" placeholder="Modifier prénom" value="{{prenom}}"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-darkgrey focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </section>
+
+          <section>
+            <p class="mb-2">
+              <strong class="font-medium text-gray-400">Nom :</strong>
+              <span class="text-darkgrey">{{nom}}</span>
+            </p>
+            <input type="text" name="nom" placeholder="Modifier nom" value="{{nom}}"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-darkgrey focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </section>
+
+          <section>
+            <p class="mb-2">
+              <strong class="font-medium text-gray-400">Email :</strong>
+              <span class="text-darkgrey">{{mail}}</span>
+            </p>
+            <input type="email" name="mail" placeholder="Modifier email" value="{{mail}}"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-darkgrey focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </section>
+
+          <section>
+            <p class="mb-2">
+              <strong class="font-medium text-gray-400">Genre :</strong>
+              <span class="text-darkgrey">{{gender}}</span>
+            </p>
+            <fieldset class="flex gap-4 border-none p-0">
+              <label class="flex items-center gap-2">
+                <input type="radio" name="gender" value="M">
+                <span>Homme</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" name="gender" value="F">
+                <span>Femme</span>
+              </label>
+            </fieldset>
+          </section>
+
+          <section>
+            <p class="mb-2">
+              <strong class="font-medium text-gray-400">Mot de passe :</strong>
+              <span class="text-darkgrey">••••••••</span>
+            </p>
+            <input type="password" name="currentPassword" placeholder="Mot de passe actuel"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-darkgrey focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">
+            <input type="password" name="newPassword" placeholder="Nouveau mot de passe"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-darkgrey focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <small class="text-gray-500 block mt-1">Laissez vide si vous ne souhaitez pas changer votre mot de
+              passe</small>
+          </section>
+        </section>
+
+        <ul class="list-none p-0">
+          <li><button id="modi-btn" class="w-full bg-ajoutpanier text-white p-2.5 mt-6 cursor-pointer hover:opacity-90">
+              Enregistrer les modifications
+            </button></li>
+          <li><button id="deco-btn" class="w-full bg-ajoutpanier text-white p-2.5 mt-6 cursor-pointer hover:opacity-90">
+              Se déconnecter
+            </button></li>
+        </ul>
+
+      </article>
+
+      <section class="flex-1 flex flex-col items-center bg-whitetext p-6 max-w-md h-[10rem]">
+        <figure class="flex flex-col gap-2.5 items-center justify-center">
+          <img class="w-[2rem] h-[2rem]" src="/assets/image/logo_marque/colis.png" alt="colis">
+          <figcaption class="font-semibold text-[1rem]">
+            Vos commandes
+          </figcaption>
+        </figure>
+        <p class="text-[0.875rem] text-center mt-2">Gardez une trace de vos commandes.</p>
+      </section>
+
     </section>
-    <button id="deco-btn" class="w-full bg-ajoutpanier text-white p-2.5 mt-2.5 cursor-pointer">Se déconnecter</button>
-  </article>
+  </section>
 </section>

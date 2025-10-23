@@ -43,7 +43,6 @@ let GalleryImageView = {
       thumbnailsContainer.appendChild(thumb);
     });
 
-    // Activer la première miniature
     const firstThumb = thumbnailsContainer.querySelector('.thumbnail');
     if (firstThumb) {
       firstThumb.classList.remove('border-transparent');

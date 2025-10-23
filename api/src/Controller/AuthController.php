@@ -1,5 +1,5 @@
 <?php
-// filepath: c:\Users\addem\Desktop\SAE301\SAE301\api\src\Controller\AuthController.php
+
 
 require_once "src/Controller/EntityController.php";
 require_once "src/Repository/UserRepository.php";
@@ -15,12 +15,10 @@ class AuthController extends EntityController {
     protected function processPostRequest(HttpRequest $request) {
         $json = $request->getJson();
         
-        // DEBUG
         error_log("JSON reçu: " . $json);
         
         $data = json_decode($json);
         
-        // DEBUG
         error_log("Data décodé: " . print_r($data, true));
         
         if(empty($data)) {
@@ -36,12 +34,10 @@ class AuthController extends EntityController {
         $mail = $data->mail;
         $password = $data->password;
         
-        // DEBUG
         error_log("Recherche user avec mail: " . $mail);
         
         $user = $this->repository->findByMail($mail);
         
-        // DEBUG
         error_log("User trouvé: " . ($user ? "OUI" : "NON"));
         
         if (!$user) {
@@ -49,7 +45,6 @@ class AuthController extends EntityController {
             return ['error' => 'Email ou mot de passe incorrect'];
         }
         
-        // DEBUG
         error_log("Password hash en BDD: " . $user->getPassword());
         error_log("Password fourni: " . $password);
         error_log("Vérification: " . (password_verify($password, $user->getPassword()) ? "OK" : "FAIL"));

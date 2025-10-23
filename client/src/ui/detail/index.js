@@ -12,13 +12,13 @@ let DetailView = {
     
     if (data.images?.length > 0) {
       const galerieDOM = GalleryImageView.dom({ images: data.images });
-      // Chercher le slot par son attribut name plutôt que par id
+  
       const slot = fragment.querySelector('slot[name="image-galerie-slot"]');
       if (slot) {
-        console.log('Slot found, replacing with gallery'); // Debug
+        console.log('Slot found, replacing with gallery'); 
         slot.replaceWith(galerieDOM);
       } else {
-        console.log('Slot not found'); // Debug
+        console.log('Slot not found');
       }
     }
     

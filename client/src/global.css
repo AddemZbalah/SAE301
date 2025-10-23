@@ -17,6 +17,10 @@
   --color-ajoutpanier : var(--clr-373A36);
   --color-title : var(--clr-212529);
   --color-whitetext : var(--clr-F2F2F2);
+  --color-bgprofil : var(--clr-CED4DA);
+  --color-darkgrey : var(--clr-6C757D);
+  --color-black : var(--clr-black);
+
 }
 
 @layer base {

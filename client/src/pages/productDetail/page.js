@@ -45,20 +45,20 @@ V.init = function(data) {
 }
 
 V.createPageFragment = function(data) {
-    // Créer le fragment depuis le template
+    
     let pageFragment = htmlToFragment(template);
     
-    // Générer le composant detail
+    
     let detailDOM = DetailView.dom(data);
     
-    // Remplacer le slot par le composant detail
+    
     pageFragment.querySelector('slot[name="detail"]').replaceWith(detailDOM);
     
     return pageFragment;
 }
 
 V.attachEvents = function(pageFragment) {
-    // Attacher un event listener au bouton
+    
     const addToCartBtn = pageFragment.querySelector('[data-buy]');
     addToCartBtn.addEventListener('click', C.handler_clickOnProduct);
     return pageFragment;

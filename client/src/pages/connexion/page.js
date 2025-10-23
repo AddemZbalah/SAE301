@@ -11,7 +11,7 @@ C.handler_submitForm = async function(ev, router) {
     const form = ev.target;
     const formData = new FormData(form);
     
-    // Créer un objet avec les données du formulaire
+    
     const data = {
         mail: formData.get('email'),
         password: formData.get('password')
@@ -31,7 +31,7 @@ C.handler_submitForm = async function(ev, router) {
         console.log('result.logged:', result?.logged);
         console.log('result.error:', result?.error);
         
-        // Vérifier si result est false (échec de la requête)
+        
         if (result === false) {
             alert('Impossible de se connecter au serveur');
             return;
@@ -40,7 +40,7 @@ C.handler_submitForm = async function(ev, router) {
         if (result && result.logged) {
             alert('Connexion réussie !');
             
-            // Vérifier s'il y a une redirection sauvegardée
+            
             const redirectPath = sessionStorage.getItem('redirectAfterLogin');
             if (redirectPath) {
                 sessionStorage.removeItem('redirectAfterLogin');

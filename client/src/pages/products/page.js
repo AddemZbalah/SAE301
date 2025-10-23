@@ -42,13 +42,13 @@ V.init = function(data){
 }
 
 V.createPageFragment = function( data ){
-   // Créer le fragment depuis le template
+
    let pageFragment = htmlToFragment(template);
    
-   // Générer les produits
+
    let productsDOM = ProductView.dom(data);
    
-   // Remplacer le slot par les produits
+
    pageFragment.querySelector('slot[name="products"]').replaceWith(productsDOM);
 
    pageFragment.getElementById("nbrarticle").textContent = `${data.length} articles`;

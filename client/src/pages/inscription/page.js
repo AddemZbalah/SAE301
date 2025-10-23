@@ -11,7 +11,7 @@ C.handler_submitForm = async function(ev) {
     const form = ev.target;
     const formData = new FormData(form);
     
-    // Créer un objet avec les données du formulaire
+    
     const data = {
         prenom: formData.get('firstName'),
         nom: formData.get('lastName'),

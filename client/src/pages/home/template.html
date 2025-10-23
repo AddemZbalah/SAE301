@@ -1,14 +1,127 @@
-<div class="mx-auto max-w-4xl p-6">
-  <h1 class="mb-6 text-4xl font-bold text-gray-900">Accueil</h1>
-  
-<img 
-    src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=400&fit=crop" 
-    alt="Image d'accueil - Shopping" 
-    class="mb-6 rounded-lg shadow-lg w-full h-64 object-cover"
-    style="filter: grayscale(1);"
-  />
+<main class="font-grotesk">
+  <section class="pt-8 pl-8">
+    <h1 class="text-5xl font-[200] mb-10">Bonjour {{prenom}}</h1>
+  </section>
 
-  <p>
-    Bienvenue sur notre plateforme de Click & Collect ! Découvrez une sélection variée de produits et profitez d'une expérience d'achat simple et rapide.
-  </p>
-</div>
+  <section
+    class="relative h-[70vh] bg-cover bg-center bg-[url('/assets/image/logo_marque/MSSSliderPromo__25F0027_M.jpg')]">
+    <figure class="absolute inset-0 bg-opacity-40"></figure>
+    <article class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+      <h2 class="text-5xl md:text-6xl font-bold mb-4">Nouvelle Collection Automne/Hiver</h2>
+      <p class="text-xl md:text-2xl mb-8">Confort et style pour toutes vos aventures</p>
+      <a href="/products"
+        class="bg-ajoutpanier hover:bg-opacity-90 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-all">
+        Découvrir la collection
+      </a>
+    </article>
+  </section>
+
+  <section class="py-16 px-4 md:px-8 bg-whitetext">
+    <h2 class="text-4xl font-bold text-center mb-12 text-black">Nos Collections</h2>
+    <nav class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <article class="group relative overflow-hidden shadow-lg hover:shadow-xl transition-all">
+        <a href="/category/1" class="block">
+          <figure>
+            <img src="/assets/image/logo_marque/Shop_by_occasion-1-WinterLOOK-25F0134_D.png" alt="Collection Vêtements"
+              class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-300">
+            <figcaption class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 class="text-3xl font-bold mb-2">Vêtements</h3>
+              <p class="text-lg">Élégance et confort au quotidien</p>
+            </figcaption>
+          </figure>
+        </a>
+      </article>
+
+      <article class="group relative overflow-hidden hover:shadow-xl transition-all">
+        <a href="/category/2" class="block">
+          <figure>
+            <img src="/assets/image/logo_marque/Shop_by_occasion-2-SneakersBianche-25F0052.jpg"
+              alt="Collection Chaussures"
+              class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-300">
+            <span class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></span>
+            <figcaption class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 class="text-3xl font-bold mb-2">Chaussures</h3>
+              <p class="text-lg">Style et sophistication</p>
+            </figcaption>
+          </figure>
+        </a>
+      </article>
+
+      <article class="group relative overflow-hidden hover:shadow-xl transition-all">
+        <a href="/category/3" class="block">
+          <figure>
+            <img src="/assets/image/logo_marque/LaunchCategory_Gender_Woman (1).jpg" alt="Collection Accessoires"
+              class="w-full h-[400px] object-cover group-hover:scale-110 transition-transform duration-300">
+            <span class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></span>
+            <figcaption class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 class="text-3xl font-bold mb-2">Accessoires</h3>
+              <p class="text-lg">Complétez votre look</p>
+            </figcaption>
+          </figure>
+        </a>
+      </article>
+    </nav>
+  </section>
+
+  <section class="py-16 px-4 md:px-8">
+    <h2 class="text-4xl font-bold text-center mb-12 text-darkgrey">Nouveautés</h2>
+    <slot name="products-slot"></slot>
+  </section>
+
+  <section class="py-16 px-4 md:px-8 bg-whitetext">
+    <ul class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 list-none">
+      <li class="text-center">
+        <article>
+          <figure class="w-16 h-16 mx-auto mb-4 bg-ajoutpanier rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </figure>
+          <h3 class="text-xl font-semibold mb-2">Qualité Premium</h3>
+          <p class="text-gray-600">Matériaux de haute qualité pour un confort optimal</p>
+        </article>
+      </li>
+
+      <li class="text-center">
+        <article>
+          <figure class="w-16 h-16 mx-auto mb-4 bg-ajoutpanier rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+              </path>
+            </svg>
+          </figure>
+          <h3 class="text-xl font-semibold mb-2">Livraison Gratuite</h3>
+          <p class="text-gray-600">Dès 50€ d'achat partout en France</p>
+        </article>
+      </li>
+
+      <li class="text-center">
+        <article>
+          <figure class="w-16 h-16 mx-auto mb-4 bg-ajoutpanier rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+              </path>
+            </svg>
+          </figure>
+          <h3 class="text-xl font-semibold mb-2">Paiement Sécurisé</h3>
+          <p class="text-gray-600">Transactions 100% sécurisées</p>
+        </article>
+      </li>
+
+      <li class="text-center">
+        <article>
+          <figure class="w-16 h-16 mx-auto mb-4 bg-ajoutpanier rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+            </svg>
+          </figure>
+          <h3 class="text-xl font-semibold mb-2">Retour Facile</h3>
+          <p class="text-gray-600">30 jours pour changer d'avis</p>
+        </article>
+      </li>
+    </ul>
+  </section>
+</main>
