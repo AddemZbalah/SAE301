@@ -5,7 +5,8 @@ import template from "./template.html?raw";
 
 
 let M = {
-    products: []
+    products: [],
+    currentProduct: null
 };
 
 M.getProductById = function(id){
@@ -16,9 +17,33 @@ M.getProductById = function(id){
 let C = {};
 
 C.handler_clickOnProduct = function(ev){
-    if (ev.target.dataset.buy!==undefined){
-        let id = ev.target.dataset.buy;
-        alert(`Produit ajouté au panier ! (Quand il y en aura un)`);
+    ev.preventDefault();
+    
+    if (ev.target.dataset.buy !== undefined){
+        // Récupérer le panier actuel depuis localStorage
+        const panier = JSON.parse(localStorage.getItem('panier')) || [];
+        
+        // Vérifier si le produit est déjà dans le panier
+        const produitExistant = panier.find(item => item.id === M.currentProduct.id);
+        
+        if (produitExistant) {
+            // Si le produit existe, augmenter la quantité
+            produitExistant.quantity += 1;
+        } else {
+            // Sinon, ajouter le produit au panier
+            panier.push({
+                id: M.currentProduct.id,
+                name: M.currentProduct.name,
+                price: M.currentProduct.price,
+                image: M.currentProduct.image,
+                quantity: 1
+            });
+        }
+        
+        // Sauvegarder le panier dans localStorage
+        localStorage.setItem('panier', JSON.stringify(panier));
+        
+        alert('Produit ajouté au panier !');
     }
 }
 
@@ -30,6 +55,7 @@ C.init = async function(params) {
     M.products = await ProductData.fetchAll();
     
     let p = M.getProductById(productId);
+    M.currentProduct = p;
     console.log("Product loaded:", p);
     
     return V.init(p);
@@ -58,9 +84,12 @@ V.createPageFragment = function(data) {
 }
 
 V.attachEvents = function(pageFragment) {
-    
+    // Attacher un event listener au bouton
     const addToCartBtn = pageFragment.querySelector('[data-buy]');
-    addToCartBtn.addEventListener('click', C.handler_clickOnProduct);
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', C.handler_clickOnProduct);
+    }
+    
     return pageFragment;
 }
 

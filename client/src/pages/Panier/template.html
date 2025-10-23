@@ -1,0 +1,36 @@
+<main class="max-w-7xl mx-auto px-4 py-8 font-grotesk">
+  <!-- En-tête du panier -->
+  <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+    <h1 class="text-lg font-medium">Mon Panier (<span id="cart-count">0</span>)</h1>
+    <a href="/products" data-link class="text-sm underline text-gray-600 hover:text-gray-900 mt-2 sm:mt-0">
+      Continuer mes achats
+    </a>
+  </header>
+
+  <section class="grid lg:grid-cols-3 gap-8">
+    <!-- Liste des produits du panier -->
+    <section id="cart-items" class="lg:col-span-2 space-y-4">
+      <!-- Message panier vide -->
+      <section id="empty-cart" class="bg-white border rounded-lg shadow-sm p-8 text-center">
+        <img src="/assets/image/logo_marque/colis.png" alt="Panier vide" class="w-24 h-24 mx-auto mb-4 opacity-50">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Votre panier est vide</h2>
+        <p class="text-gray-500 mb-6">Découvrez nos produits et ajoutez-les à votre panier</p>
+        <a href="/products" data-link
+          class="bg-ajoutpanier hover:bg-opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-all inline-block">
+          Découvrir nos produits
+        </a>
+      </section>
+    </section>
+
+    <!-- Résumé de la commande -->
+    <aside class="bg-white border rounded-lg shadow-sm p-6 self-start">
+      <section class="flex justify-between mb-6">
+        <p class="font-medium">Total</p>
+        <p id="total" class="font-medium">0,00 €</p>
+      </section>
+      <button id="checkout-btn" class="w-full bg-black text-white py-3 rounded-full hover:bg-gray-800 transition">
+        Procéder au paiement
+      </button>
+    </aside>
+  </section>
+</main>

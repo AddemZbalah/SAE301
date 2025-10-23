@@ -6,6 +6,7 @@ import { ProductDetailPage } from "./pages/productDetail/page.js";
 import { ConnexionPage } from "./pages/connexion/page.js";
 import { InscriptionPage } from "./pages/inscription/page.js";
 import { ProfilPage } from "./pages/profil/page.js";
+import { PanierPage } from "./pages/Panier/page.js"; // Ajout de l'import
 import { UserData } from "./data/user.js";
 
 import { RootLayout } from "./layouts/root/layout.js";
@@ -37,6 +38,8 @@ router.addRoute("/connexion", ConnexionPage, {useLayout : false});
 router.addRoute("/inscription", InscriptionPage, {useLayout : false});
 
 router.addRoute("/profil", ProfilPage, {requireAuth: true});
+
+router.addRoute("/panier", PanierPage); // Ajout de la route panier
 
 router.addRoute("*", The404Page);
 
