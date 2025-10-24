@@ -1,78 +1,94 @@
 let PanierData = {};
 
-// Ajouter un produit au panier
-PanierData.ajouterAuPanier = async function(produit){
-    console.log('🔍 Produit reçu:', produit); // Debug
+PanierData.ajouterAuPanier = async function(product){
+    console.log('Produit reçu dans ajouterAuPanier:', product);
+    console.log('Images du produit:', product.images);
     
-    // Récupérer le panier actuel depuis localStorage
-    let panier = localStorage.getItem('panier');
-    let tableauPanier = panier ? JSON.parse(panier) : [];
+    let cart = localStorage.getItem('panier');
+    let cartArray = cart ? JSON.parse(cart) : [];
     
-    // Chercher si le produit existe déjà dans le panier
-    const indexProduitExistant = tableauPanier.findIndex(article => article.id === produit.id);
+    const existingProductIndex = cartArray.findIndex(item => item.id === product.id);
     
-    if (indexProduitExistant !== -1) {
-        // Si le produit existe, augmenter sa quantité
-        tableauPanier[indexProduitExistant].quantity += 1;
+    if (existingProductIndex !== -1) {
+        cartArray[existingProductIndex].quantity += 1;
     } else {
-        // Créer le nouveau produit avec l'image
+        
+        let imageUrl = '/assets/image/products/default.jpg';
+        if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+            imageUrl = `/assets/image/products/${product.images[0]}`;
+        }
+        
         const nouveauProduit = {
-            id: produit.id,
-            name: produit.name || produit.nom,
-            price: produit.price || produit.prix,
-            image: produit.image || produit.image || '/assets/image/products/default.jpg',
-            description: produit.description || '',
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: imageUrl,
             quantity: 1
         };
         
-        console.log('✅ Nouveau produit créé:', nouveauProduit); // Debug
-        console.log('✅ Image stockée:', nouveauProduit.image); // Debug
-        
-        tableauPanier.push(nouveauProduit);
+        console.log('✅ Nouveau produit créé:', nouveauProduit);
+        cartArray.push(nouveauProduit);
     }
     
-    // Sauvegarder le panier mis à jour
-    localStorage.setItem('panier', JSON.stringify(tableauPanier));
-    console.log('💾 Panier sauvegardé:', tableauPanier); // Debug
+    localStorage.setItem('panier', JSON.stringify(cartArray));
+    console.log('💾 Panier sauvegardé:', cartArray);
+
+    PanierData.updateCartBadge();
+    return cartArray;
+}
+
+PanierData.updateCartBadge = function() {
+    const cartCountBadge = document.querySelector('#cart-count-badge');
     
-    return tableauPanier;
+    if (cartCountBadge) {
+        const cartItems = PanierData.obtenirPanier();
+        const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        
+        cartCountBadge.textContent = count;
+        
+        if (count > 0) {
+            cartCountBadge.classList.remove('hidden');
+            cartCountBadge.classList.add('flex');
+        } else {
+            cartCountBadge.classList.add('hidden');
+            cartCountBadge.classList.remove('flex');
+        }
+    }
 }
 
-// Fonction pour obtenir le panier complet
 PanierData.obtenirPanier = function() {
-    let panier = localStorage.getItem('panier');
-    return panier ? JSON.parse(panier) : [];
+    let cart = localStorage.getItem('panier');
+    return cart ? JSON.parse(cart) : [];
 }
 
-// Fonction pour vider le panier
 PanierData.viderPanier = function() {
     localStorage.removeItem('panier');
+    PanierData.updateCartBadge(); 
     return [];
 }
 
-// Fonction pour retirer un produit
-PanierData.retirerDuPanier = function(idProduit) {
-    let tableauPanier = this.obtenirPanier();
-    tableauPanier = tableauPanier.filter(article => article.id !== Number(idProduit));
-    localStorage.setItem('panier', JSON.stringify(tableauPanier));
-    return tableauPanier;
+PanierData.retirerDuPanier = function(productId) {
+    let cartArray = PanierData.obtenirPanier();
+    cartArray = cartArray.filter(item => item.id !== Number(productId));
+    localStorage.setItem('panier', JSON.stringify(cartArray));
+    PanierData.updateCartBadge(); 
+    return cartArray;
 }
 
-// Fonction pour modifier la quantité
-PanierData.modifierQuantite = function(idProduit, quantite) {
-    let tableauPanier = this.obtenirPanier();
-    const indexProduit = tableauPanier.findIndex(article => article.id === idProduit);
+PanierData.modifierQuantite = function(productId, quantity) {
+    let cartArray = PanierData.obtenirPanier();
+    const productIndex = cartArray.findIndex(item => item.id === productId);
     
-    if (indexProduit !== -1) {
-        if (quantite <= 0) {
-            tableauPanier.splice(indexProduit, 1);
+    if (productIndex !== -1) {
+        if (quantity <= 0) {
+            cartArray.splice(productIndex, 1);
         } else {
-            tableauPanier[indexProduit].quantity = quantite;
+            cartArray[productIndex].quantity = quantity;
         }
-        localStorage.setItem('panier', JSON.stringify(tableauPanier));
+        localStorage.setItem('panier', JSON.stringify(cartArray));
     }
-    
-    return tableauPanier;
+    PanierData.updateCartBadge();
+    return cartArray;
 }
 
 export { PanierData };

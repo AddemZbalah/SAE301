@@ -20,6 +20,8 @@
   --color-bgprofil : var(--clr-CED4DA);
   --color-darkgrey : var(--clr-6C757D);
   --color-black : var(--clr-black);
+  --color-cartdesc : var(--clr-C1C1C1);
+  --color-green : var(--clr-green);
 
 }
 
@@ -51,6 +53,7 @@
     --clr-3D3D3D: oklch(28.5% 0.002 265);
     --clr-626A7C: oklch(43.2% 0.034 256.3);
     --clr-5D2DE6: oklch(46.1% 0.261 294.6);
+    --clr-green: oklch(47.25% 0.159 142.77);
     --mon-image: url("/image-profile-mobile.webp");
   }
 }

@@ -21,13 +21,16 @@
       <a href="/category/3" data-link class="px-1 py-1 hover:underline hover:font-semibold">ACCESSOIRES</a>
     </nav>
 
-    <!-- Icônes user et panier côte à côte -->
     <section class="flex items-center gap-4 ml-auto lg:mr-25">
       <a href="/profil" data-link class="cursor-pointer">
         <img class="w-5 h-5" src="../../../assets/image/logo_marque/user.png" alt="Profil utilisateur">
       </a>
-      <a href="/panier" data-link class="cursor-pointer">
+      <a href="/panier" data-link class="cursor-pointer relative">
         <img class="w-5 h-5" src="../../../assets/image/logo_marque/market.png" alt="cart">
+        <span id="cart-count-badge"
+          class="absolute -top-2 -right-2 bg-black text-white text-[0.7rem] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          0
+        </span>
       </a>
     </section>
   </section>

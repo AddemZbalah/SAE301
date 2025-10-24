@@ -1,160 +1,150 @@
 import template from "./template.html?raw";
+import { PanierData } from "../../data/panier.js";
 import { htmlToFragment } from "../../lib/utils.js";
 import { PanierProduitView } from "../../ui/PanierProduit/index.js";
-
-let M = {
-    panier: []
-};
 
 let C = {};
 
 C.init = function(){
-    const donneesPanier = localStorage.getItem('panier');
-    M.panier = donneesPanier ? JSON.parse(donneesPanier) : [];
-    
-    console.log('Panier chargé:', M.panier); // Debug
-    
-    return V.init();
+    let cartItems = PanierData.obtenirPanier();
+    return V.init(cartItems);
 }
 
-C.gererSuppressionArticle = function(event){
-    const idProduit = Number(event.currentTarget.dataset.id);
-    M.panier = M.panier.filter(article => article.id !== idProduit);
-    localStorage.setItem('panier', JSON.stringify(M.panier));
+C.handlerRemoveItem = function(event){
+    const productId = Number(event.currentTarget.dataset.id);
+    PanierData.retirerDuPanier(productId);
     
-    const nouveauFragment = C.init();
-    const conteneurApp = document.querySelector('#app');
-    conteneurApp.innerHTML = '';
-    conteneurApp.appendChild(nouveauFragment);
+    const newFragment = C.init();
+    const appContainer = document.querySelector('#app');
+    appContainer.innerHTML = '';
+    appContainer.appendChild(newFragment);
 }
 
-C.gererDiminutionQuantite = function(event){
-    const idProduit = Number(event.currentTarget.dataset.id);
+C.handlerDecreaseQuantity = function(event){
+    const productId = Number(event.currentTarget.dataset.id);
     const element = event.currentTarget.closest('[data-article-panier]');
-    const quantiteActuelle = Number(element.querySelector('[data-quantite]').textContent);
+    const currentQty = Number(element.querySelector('[data-quantite]').textContent);
     
-    if (quantiteActuelle > 1) {
-        const article = M.panier.find(item => item.id === idProduit);
-        if(article){
-            article.quantity = quantiteActuelle - 1;
-            localStorage.setItem('panier', JSON.stringify(M.panier));
-            element.querySelector('[data-quantite]').textContent = quantiteActuelle - 1;
-            V.mettreAJourPrixProduit(element, quantiteActuelle - 1);
-            V.mettreAJourPrixTotal();
-        }
+    if (currentQty > 1) {
+        PanierData.modifierQuantite(productId, currentQty - 1);
+        element.querySelector('[data-quantite]').textContent = currentQty - 1;
+        V.updateProductPrice(element, currentQty - 1);
+        V.updateTotalPrice();
     }
 }
 
-C.gererAugmentationQuantite = function(event){
-    const idProduit = Number(event.currentTarget.dataset.id);
+C.handlerIncreaseQuantity = function(event){
+    const productId = Number(event.currentTarget.dataset.id);
     const element = event.currentTarget.closest('[data-article-panier]');
-    const quantiteActuelle = Number(element.querySelector('[data-quantite]').textContent);
+    const currentQty = Number(element.querySelector('[data-quantite]').textContent);
     
-    const article = M.panier.find(item => item.id === idProduit);
-    if(article){
-        article.quantity = quantiteActuelle + 1;
-        localStorage.setItem('panier', JSON.stringify(M.panier));
-        element.querySelector('[data-quantite]').textContent = quantiteActuelle + 1;
-        V.mettreAJourPrixProduit(element, quantiteActuelle + 1);
-        V.mettreAJourPrixTotal();
-    }
+    PanierData.modifierQuantite(productId, currentQty + 1);
+    element.querySelector('[data-quantite]').textContent = currentQty + 1;
+    V.updateProductPrice(element, currentQty + 1);
+    V.updateTotalPrice();
 }
 
 let V = {};
 
-V.analyserPrix = function(chaineTexte){
-    return parseFloat(chaineTexte.replace(/\s/g, '').replace(',', '.'));
+
+V.parsePrice = function(priceString){
+
+    return parseFloat(priceString.replace(/\s/g, '').replace(',', '.'));
 }
 
-V.formaterPrix = function(nombre){
-    return nombre.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+V.formatPrice = function(number){
+
+    return number.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-V.attacherEvenements = function(fragment){
-    const produits = fragment.querySelectorAll('[data-article-panier]');
-    produits.forEach(element => {
-        const btnSupprimer = element.querySelector('[data-btn-supprimer]');
-        const btnDiminuer = element.querySelector('[data-btn-diminuer]');
-        const btnAugmenter = element.querySelector('[data-btn-augmenter]');
-        
-        if(btnSupprimer) btnSupprimer.addEventListener('click', C.gererSuppressionArticle);
-        if(btnDiminuer) btnDiminuer.addEventListener('click', C.gererDiminutionQuantite);
-        if(btnAugmenter) btnAugmenter.addEventListener('click', C.gererAugmentationQuantite);
+V.attachEvents = function(fragment){
+    let products = fragment.querySelectorAll('[data-article-panier]');
+    products.forEach(element => {
+        element.querySelector('[data-btn-supprimer]').addEventListener('click', C.handlerRemoveItem);
+        element.querySelector('[data-btn-diminuer]').addEventListener('click', C.handlerDecreaseQuantity);
+        element.querySelector('[data-btn-augmenter]').addEventListener('click', C.handlerIncreaseQuantity);
     });
 }
 
-V.nombreArticles = function(fragment){
-    const nbArticles = M.panier.reduce((sum, item) => sum + item.quantity, 0);
-    const compteurPanier = fragment.querySelector('#cart-count');
-    if(compteurPanier){
-        compteurPanier.textContent = `${nbArticles} article(s)`;
+V.nbItems = function(fragment){
+    const cartItems = PanierData.obtenirPanier();
+    const nbItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    let cartCounter = fragment.querySelector('#cart-count');
+    if(cartCounter){
+        cartCounter.textContent = `${nbItems} article(s)`;
     }
 }
 
-V.mettreAJourPrixProduit = function(element, quantite){
-    const idProduit = Number(element.dataset.id);
-    const produit = M.panier.find(article => article.id === idProduit);
+V.updateProductPrice = function(element, quantity){
+    const productId = Number(element.dataset.id);
+    const cartItems = PanierData.obtenirPanier();
+    const product = cartItems.find(item => item.id === productId);
     
-    if(produit){
-        const prixNombre = typeof produit.price === 'string' ? V.analyserPrix(produit.price) : produit.price;
-        const prixTotal = prixNombre * quantite;
-        const elementPrix = element.querySelector('[data-prix-produit]');
-        if(elementPrix){
-            elementPrix.textContent = V.formaterPrix(prixTotal) + ' €';
+    if(product){
+        const priceNumber = typeof product.price === 'string' ? V.parsePrice(product.price) : product.price;
+        const totalPrice = priceNumber * quantity;
+        element.querySelector('[data-prix-produit]').textContent = V.formatPrice(totalPrice) + ' €';
+    }
+}
+
+V.updateAllProductsPrices = function(fragment){
+    const products = fragment.querySelectorAll('[data-article-panier]');
+    products.forEach(element => {
+        const quantity = Number(element.querySelector('[data-quantite]').textContent);
+        V.updateProductPrice(element, quantity);
+    });
+}
+
+V.updateTotalPrice = function(fragment){
+    const cartItems = PanierData.obtenirPanier();
+    const total = cartItems.reduce((sum, item) => {
+        const priceNumber = typeof item.price === 'string' ? V.parsePrice(item.price) : item.price;
+        return sum + (priceNumber * item.quantity);
+    }, 0);
+    
+    if (fragment) {
+        let totalElement = fragment.querySelector('#total');
+        console.log("Total price updated:", total);
+        if(totalElement){
+            totalElement.textContent = V.formatPrice(total) + ' €';
+        }
+    } else {
+        let totalElement = document.querySelector('#total');
+        console.log("Total price updated:", total);
+        if(totalElement){
+            totalElement.textContent = V.formatPrice(total) + ' €';
         }
     }
 }
 
-V.mettreAJourTousPrix = function(fragment){
-    const produits = fragment.querySelectorAll('[data-article-panier]');
-    produits.forEach(element => {
-        const quantite = Number(element.querySelector('[data-quantite]').textContent);
-        V.mettreAJourPrixProduit(element, quantite);
-    });
-}
-
-V.mettreAJourPrixTotal = function(fragment){
-    const total = M.panier.reduce((somme, article) => {
-        const prixNombre = typeof article.price === 'string' ? V.analyserPrix(article.price) : article.price;
-        return somme + (prixNombre * (article.quantity || 1));
-    }, 0);
-    
-    const conteneur = fragment || document;
-    const elementTotal = conteneur.querySelector('#total');
-    
-    if(elementTotal){
-        elementTotal.textContent = V.formaterPrix(total) + ' €';
-    }
-}
-
-V.init = function(){
-    const fragment = V.creerFragmentPage();
-    V.nombreArticles(fragment);
-    V.mettreAJourTousPrix(fragment);
-    V.mettreAJourPrixTotal(fragment);
-    V.attacherEvenements(fragment);
+V.init = function(cartItems){
+    let fragment = V.createPageFragment(cartItems);
+    V.nbItems(fragment);
+    V.updateAllProductsPrices(fragment);
+    V.updateTotalPrice(fragment);
+    V.attachEvents(fragment);
     return fragment;
 }
 
-V.creerFragmentPage = function(){
-    const fragmentPage = htmlToFragment(template);
-    const conteneurArticles = fragmentPage.querySelector('#cart-items');
-    const panierVide = fragmentPage.querySelector('#empty-cart');
+V.createPageFragment = function(cartItems){
+    let pageFragment = htmlToFragment(template);
+    let panierVide = pageFragment.querySelector('#empty-cart');
     
-    if (M.panier.length === 0) {
+    if (cartItems.length === 0) {
         panierVide.style.display = 'block';
     } else {
         panierVide.style.display = 'none';
-        
-        // Utiliser PanierProduitView pour créer les articles avec le bon template
-        const produitsDOM = PanierProduitView.dom(M.panier);
-        conteneurArticles.insertBefore(produitsDOM, panierVide);
+        let productCartDOM = PanierProduitView.dom(cartItems);
+        let cartItemsContainer = pageFragment.querySelector('#cart-items');
+        cartItemsContainer.insertBefore(productCartDOM, panierVide);
     }
     
-    return fragmentPage;
+    return pageFragment;
 }
 
 export function PanierPage(){
-    console.log("Panier actuel:", M.panier);
+    const cartItems = PanierData.obtenirPanier();
+    console.log("Cart items:", cartItems);
     return C.init();
 }
