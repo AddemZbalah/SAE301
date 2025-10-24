@@ -2,12 +2,53 @@ import template from "./template.html?raw";
 import { PanierData } from "../../data/panier.js";
 import { htmlToFragment } from "../../lib/utils.js";
 import { PanierProduitView } from "../../ui/PanierProduit/index.js";
+import { jsonPostRequest } from "../../lib/api-request.js";
+import { UserData } from "../../data/user.js"; // pour récupérer l'utilisateur connecté
+
 
 let C = {};
 
 C.init = function(){
     let cartItems = PanierData.obtenirPanier();
     return V.init(cartItems);
+}
+
+async function handleCheckout() {
+    const user = await UserData.getCurrentUser();
+    const cartItems = PanierData.obtenirPanier();
+
+    if (!user || !user.id || cartItems.length === 0) {
+        alert("Vous devez être connecté et avoir des produits dans le panier !");
+        return;
+    }
+
+    // Prépare les données à envoyer
+    const data = {
+        utilisateurId: user.id,
+        montantTotal: cartItems.reduce((sum, item) => {
+            const priceNumber = typeof item.price === 'string' ? V.parsePrice(item.price) : item.price;
+            return sum + (priceNumber * item.quantity);
+        }, 0),
+        articles: cartItems.map(item => ({
+            productId: item.id,
+            productName: item.name,
+            quantity: item.quantity,
+            unitPrice: typeof item.price === 'string' ? V.parsePrice(item.price) : item.price,
+            totalPrice: (typeof item.price === 'string' ? V.parsePrice(item.price) : item.price) * item.quantity
+        }))
+    };
+
+    // Envoie la commande à l'API
+    const result = await jsonPostRequest("commande", data);
+
+    if (result && result.id) {
+        // Vide le panier
+        PanierData.viderPanier();
+        // Redirige vers la page Order
+        window.location.href = "/order";
+    } else {
+        alert("Erreur lors de la validation de la commande !");
+    }
 }
 
 C.handlerRemoveItem = function(event){
@@ -124,6 +165,15 @@ V.init = function(cartItems){
     V.updateAllProductsPrices(fragment);
     V.updateTotalPrice(fragment);
     V.attachEvents(fragment);
+
+    // Ajoute l'event listener sur le bouton de validation
+    setTimeout(() => {
+        const checkoutBtn = fragment.querySelector("#checkout-btn");
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener("click", handleCheckout);
+        }
+    }, 0);
+
     return fragment;
 }
 
@@ -146,5 +196,10 @@ V.createPageFragment = function(cartItems){
 export function PanierPage(){
     const cartItems = PanierData.obtenirPanier();
     console.log("Cart items:", cartItems);
+
+    
+
+    
+
     return C.init();
 }

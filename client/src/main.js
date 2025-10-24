@@ -11,6 +11,7 @@ import { UserData } from "./data/user.js";
 
 import { RootLayout } from "./layouts/root/layout.js";
 import { The404Page } from "./pages/404/page.js";
+import { OrderPage } from "./pages/Order/page.js";
 
 const router = new Router('app', {loginPath: '/connexion'});
 
@@ -40,6 +41,8 @@ router.addRoute("/inscription", InscriptionPage, {useLayout : false});
 router.addRoute("/profil", ProfilPage, {requireAuth: true});
 
 router.addRoute("/panier", PanierPage, {requireAuth: true});
+
+router.addRoute("/order", OrderPage, {requireAuth: true});
 
 router.addRoute("*", The404Page);
 

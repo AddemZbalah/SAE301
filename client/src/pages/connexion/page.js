@@ -39,6 +39,8 @@ C.handler_submitForm = async function(ev, router) {
         
         if (result && result.logged) {
             alert('Connexion réussie !');
+
+            localStorage.setItem("user", JSON.stringify(result.user || result));
             
             
             const redirectPath = sessionStorage.getItem('redirectAfterLogin');
