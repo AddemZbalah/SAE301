@@ -22,6 +22,8 @@
   --color-black : var(--clr-black);
   --color-cartdesc : var(--clr-C1C1C1);
   --color-green : var(--clr-green);
+  --color-red : var(--clr-D53D50);
+  --color-bgwhite : var(--clr-white);
 
 }
 

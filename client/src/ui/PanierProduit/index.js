@@ -11,7 +11,7 @@ let PanierProduitView = {
         let html = template
           .replaceAll('{{id}}', product.id)
           .replaceAll('{{name}}', product.name)
-          .replaceAll('{{image}}', product.image || '/assets/image/products/default.jpg') // ✅ Utiliser "image" (singulier)
+          .replaceAll('{{image}}', product.image || '/assets/image/products/default.jpg')
           .replaceAll('{{price}}', product.price)
           .replaceAll('{{quantity}}', product.quantity);
         

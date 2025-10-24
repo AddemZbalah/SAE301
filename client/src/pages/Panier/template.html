@@ -1,14 +1,14 @@
-<main class="max-w-7xl mx-auto px-4 py-8 font-grotesk">
+<section class="max-w-7xl mx-auto px-4 py-8 font-grotesk">
   <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
     <ul>
       <li>
         <p class="text-2xl font-medium">Mon Panier </p>
       </li>
       <li>
-        <p class="text-gray-500">(<span id="cart-count">0</span> articles)</p>
+        <p class="text-cartdesc">(<span id="cart-count">0</span> articles)</p>
       </li>
     </ul>
-    <a href="/products" data-link class="text-sm underline text-gray-600 hover:text-gray-900 mt-2 sm:mt-0">
+    <a href="/products" data-link class="text-sm underline text-desc hover:text-black mt-2 sm:mt-0">
       Continuer mes achats
     </a>
   </header>
@@ -17,19 +17,19 @@
 
     <section id="cart-items" class="lg:col-span-2 space-y-4">
 
-      <section id="empty-cart" class="bg-white border rounded-lg shadow-sm p-8 text-center">
+      <section id="empty-cart" class="bg-bgwhite p-8 text-center">
         <img src="/assets/image/logo_marque/colis.png" alt="Panier vide" class="w-24 h-24 mx-auto mb-4 opacity-50">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Votre panier est vide</h2>
-        <p class="text-gray-500 mb-6">Découvrez nos produits et ajoutez-les à votre panier</p>
+        <h2 class="text-2xl font-semibold text-desc mb-2">Votre panier est vide</h2>
+        <p class="text-cartdesc mb-6">Découvrez nos produits et ajoutez-les à votre panier</p>
         <a href="/products" data-link
-          class="bg-ajoutpanier hover:bg-opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-all inline-block">
+          class="bg-ajoutpanier hover:bg-opacity-90 text-whitetext font-semibold py-3 px-6 transition-all inline-block cursor-pointer">
           Découvrir nos produits
         </a>
       </section>
     </section>
 
 
-    <aside class="bg-white self-start">
+    <aside class="bg-bgwhite self-start">
       <h2 class="text-xl font-bold mb-6">Récapitulatif de la commande</h2>
       <section class="flex justify-between mb-6">
         <p class="font-medium text-desc">Total</p>
@@ -44,9 +44,9 @@
         <p id="livraison" class="font-bold uppercase text-green">gratuite</p>
       </section>
       <button id="checkout-btn"
-        class="w-full bg-ajoutpanier uppercase font-semibold text-white py-3 transition cursor-pointer">
+        class="w-full bg-ajoutpanier uppercase font-semibold text-whitetext py-3 transition cursor-pointer">
         Valider la commande
       </button>
     </aside>
   </section>
-</main>
+</section>

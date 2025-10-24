@@ -19,8 +19,8 @@ C.handler_clickOnProduct = async function(ev){
     ev.preventDefault();
     
     if (ev.target.dataset.buy !== undefined){
-        console.log('🔍 PRODUIT COMPLET:', M.currentProduct);
-        console.log('🔍 Clés disponibles:', Object.keys(M.currentProduct));
+        console.log('PRODUIT COMPLET:', M.currentProduct);
+        console.log('Clés disponibles:', Object.keys(M.currentProduct));
         
         await PanierData.ajouterAuPanier(M.currentProduct);
         
